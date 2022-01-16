@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<decision id="Feste_på_fredag">
+			<state id="Feste" />
+			<state id="BliHjemme" />
+		</decision>
+		<decision id="Dra_ut_på_Lørdag">
+			<state id="Feste" />
+			<state id="BliHjemme" />
+			<parents>Feste_på_fredag</parents>
+		</decision>
+		<cpt id="Alkohol_konsum">
+			<state id="Ingenting" />
+			<state id="Lite" />
+			<state id="Moderat" />
+			<state id="Mye" />
+			<parents>Feste_på_fredag Dra_ut_på_Lørdag</parents>
+			<probabilities>0.01 0.05 0.3 0.64 0.02 0.1 0.7 0.18 0.01 0.05 0.64 0.3 0.3 0.6 0.09 0.01</probabilities>
+		</cpt>
+		<cpt id="Sosialisering">
+			<state id="Lite" />
+			<state id="Mye" />
+			<parents>Feste_på_fredag Dra_ut_på_Lørdag Alkohol_konsum</parents>
+			<probabilities>0.1 0.9 0.08 0.92 0.06 0.9399999999999999 0.01 0.99 0.15 0.85 0.13 0.87 0.11 0.89 0.09 0.91 0.2 0.8 0.17 0.83 0.15 0.85 0.12 0.88 0.25 0.75 0.22 0.78 0.2 0.8 0.18 0.82</probabilities>
+		</cpt>
+		<cpt id="Bakfull">
+			<state id="Ingenting" />
+			<state id="Moderat" />
+			<state id="Sterkt" />
+			<parents>Alkohol_konsum</parents>
+			<probabilities>1 0 0 0.95 0.05 0 0.7 0.2 0.1 0 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Trening">
+			<state id="IkkeTrent" />
+			<state id="Trent" />
+			<parents>Bakfull</parents>
+			<probabilities>0.1 0.9 0.5 0.5 0.9 0.1</probabilities>
+		</cpt>
+		<cpt id="Ernæring">
+			<state id="Dårlig" />
+			<state id="Bra" />
+			<parents>Bakfull</parents>
+			<probabilities>0.2 0.8 0.5 0.5 0.1 0.9</probabilities>
+		</cpt>
+		<cpt id="Tid">
+			<state id="Lite" />
+			<state id="Moderat" />
+			<state id="Mye" />
+			<parents>Sosialisering Trening Ernæring</parents>
+			<probabilities>0 0 1 0 0.1 0.9 0 0.1 0.9 0.05 0.1 0.85 0.1 0.2 0.7 0.2 0.15 0.65 0.5 0.3 0.2 0.7 0.2 0.1</probabilities>
+		</cpt>
+		<cpt id="Kjæreste">
+			<state id="FårIkkeKjæreste" />
+			<state id="FårKjæreste" />
+			<parents>Sosialisering</parents>
+			<probabilities>0.8 0.2 0.6 0.4</probabilities>
+		</cpt>
+		<cpt id="Stress">
+			<state id="Lite" />
+			<state id="Mye" />
+			<parents>Tid Trening Kjæreste</parents>
+			<probabilities>0.5 0.5 0.8 0.2 0.8 0.2 1 0 0.5 0.5 0.6 0.4 0.6 0.4 0.7 0.3 0 1 0.2 0.8 0.2 0.8 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Venner">
+			<state id="Lite" />
+			<state id="Moderat" />
+			<state id="Mye" />
+			<parents>Sosialisering</parents>
+			<probabilities>0.9 0.1 0 0.1 0.3 0.6</probabilities>
+		</cpt>
+		<cpt id="Node4">
+			<state id="IkkeSosial" />
+			<state id="Sosial" />
+			<parents>Venner Kjæreste</parents>
+			<probabilities>1 0 0.5 0.5 0.2 0.8 0.1 0.9 0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="Selvrealisering">
+			<state id="Lite" />
+			<state id="Mye" />
+			<parents>Trening Kjæreste Ernæring</parents>
+			<probabilities>1 0 0.9 0.1 0.6 0.4 0.5 0.5 0.8 0.2 0.7 0.3 0.2 0.8 0 1</probabilities>
+		</cpt>
+		<utility id="Lykke">
+			<parents>Stress Node4 Selvrealisering</parents>
+			<utilities>0 200 300 500 -500 -200 -300 0</utilities>
+		</utility>
+		<cpt id="Søvn">
+			<state id="Lite" />
+			<state id="Mye" />
+			<parents>Feste_på_fredag Dra_ut_på_Lørdag Alkohol_konsum</parents>
+			<probabilities>0.9 0.1 0.92 0.08 0.9399999999999999 0.06 0.99 0.01 0.8 0.2 0.82 0.18 0.84 0.16 0.9 0.1 0.7 0.3 0.75 0.25 0.78 0.22 0.85 0.15 0.3 0.7 0.32 0.68 0.4 0.6 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Motivasjon">
+			<state id="IkkeUthvilt" />
+			<state id="Uthvilt" />
+			<parents>Bakfull Søvn</parents>
+			<probabilities>0.5 0.5 0.03 0.97 0.7 0.3 0.2 0.8 0.95 0.05 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Skolemengde">
+			<state id="Lite" />
+			<state id="Mye" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<utility id="Skole">
+			<parents>Motivasjon Tid Skolemengde</parents>
+			<utilities>-400 -500 -200 -400 -100 -300 100 0 200 100 500 400</utilities>
+		</utility>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 3.0.6128.0 ACADEMIC" name="Network1">
+			<node id="Lykke">
+				<name>Lykke</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>180 493 290 559</position>
+			</node>
+			<node id="Skole">
+				<name>Skole</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>437 494 550 558</position>
+			</node>
+			<node id="Stress">
+				<name>Stress</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 386 274 441</position>
+			</node>
+			<node id="Node4">
+				<name>Sosial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>97 405 174 456</position>
+			</node>
+			<node id="Tid">
+				<name>Tid</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>361 366 444 418</position>
+			</node>
+			<node id="Motivasjon">
+				<name>Motivasjon og uthvilthet</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>447 347 541 397</position>
+			</node>
+			<node id="Bakfull">
+				<name>Bakrus</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>413 191 491 254</position>
+			</node>
+			<node id="Trening">
+				<name>Trening</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>355 273 435 320</position>
+			</node>
+			<node id="Alkohol_konsum">
+				<name>Alkohol konsum</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>314 149 400 202</position>
+			</node>
+			<node id="Søvn">
+				<name>Søvn</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>500 167 569 223</position>
+			</node>
+			<node id="Sosialisering">
+				<name>Sosialisering</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>179 184 258 240</position>
+			</node>
+			<node id="Feste_på_fredag">
+				<name>Feste på fredag</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>155 68 278 111</position>
+			</node>
+			<node id="Dra_ut_på_Lørdag">
+				<name>Feste på lørdag</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>376 69 519 112</position>
+			</node>
+			<node id="Selvrealisering">
+				<name>Selvrealisering</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>287 422 369 473</position>
+			</node>
+			<node id="Kjæreste">
+				<name>Kjæreste</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>164 287 244 335</position>
+			</node>
+			<node id="Skolemengde">
+				<name>Skolemengde</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>557 362 633 409</position>
+			</node>
+			<node id="Venner">
+				<name>Venner</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>87 268 162 315</position>
+			</node>
+			<node id="Ernæring">
+				<name>Ernæring</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>275 232 345 278</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
